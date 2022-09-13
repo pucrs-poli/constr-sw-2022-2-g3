@@ -68,6 +68,14 @@ export type KeycloakCreateUserRequest = KeycloakUserRepresentation;
 
 export type KeycloakCreateUserResponse = KeycloakResponse<{}>;
 
+export type KeycloakUpdateUserRequest = KeycloakUserRepresentation;
+
+export type KeycloakUpdateUserResponse = KeycloakResponse<{}>;
+
+export interface KeycloakSetUserPasswordRequest {
+    password: string;
+}
+
 export class KeycloakClient {
     public static async login(clientId: string, username: string, password: string): Promise<KeycloakLoginResponse> {
         const url = process.env.KEYCLOAK_AUTH_SERVER_URL;
@@ -130,6 +138,61 @@ export class KeycloakClient {
                 headers: {
                     Authorization: 'Bearer ' + token,
                 },
+                json: true,
+            }, (_, response, body) => resolve({status: response.statusCode, data: body}));
+        });
+    }
+
+    public static async deleteUserById(token: string, id: string) {
+        const url = process.env.KEYCLOAK_AUTH_SERVER_URL;
+        const realm = process.env.KEYCLOAK_REALM;
+        return new Promise<{status: number, data: any[]}>(resolve => {
+            request({
+                url: `${url}/admin/realms/${realm}/users/${id}`,
+                method: 'DELETE',
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                },
+                json: true,
+            }, (_, response, body) => resolve({status: response.statusCode, data: body}));
+        });
+    }
+    
+
+    public static async updateUserById(token: string, id: string, body: KeycloakUpdateUserRequest): Promise<KeycloakUpdateUserResponse> {
+        const url = process.env.KEYCLOAK_AUTH_SERVER_URL;
+        const realm = process.env.KEYCLOAK_REALM;
+        return new Promise<{status: number, data: any[]}>(resolve => {
+            request({
+                url: `${url}/admin/realms/${realm}/users/${id}`,
+                method: 'PUT',
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                },
+                body,
+                json: true,
+            }, (_, response, body) => resolve({status: response.statusCode, data: body}));
+        });
+    }
+
+    // FIXME: Doesnt work
+    public static async setUserPassword(token: string, id: string, body: KeycloakSetUserPasswordRequest) {
+        const url = process.env.KEYCLOAK_AUTH_SERVER_URL;
+        const realm = process.env.KEYCLOAK_REALM;
+        const a = {
+            type: 'password',
+            temporary: false,
+            value: body.password,
+        }
+        console.log('a', a)
+        return new Promise<{status: number, data: any[]}>(resolve => {
+            request({
+                url: `${url}/admin/realms/${realm}/users/${id}/reset-password`,
+                method: 'PUT',
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                },
+                body: a,
                 json: true,
             }, (_, response, body) => resolve({status: response.statusCode, data: body}));
         });

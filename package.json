@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "ts-node-dev --transpile-only --respawn src/index.ts"
+    "start": "ts-node-dev --transpile-only --respawn src/index.ts",
+    "setup:dotenv": "shx test -f .env || cp example-env .env",
+    "up:keycloak": "docker-compose up -d",
+    "down:keycloak": "docker-compose down",
+    "postinstall": "npm run setup:dotenv"
   },
   "repository": {
     "type": "git",
@@ -21,6 +25,7 @@
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "request": "^2.88.2",
+    "shx": "^0.3.4",
     "typescript": "^4.8.2"
   },
   "devDependencies": {
