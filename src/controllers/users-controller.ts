@@ -12,8 +12,7 @@ export interface UpdateUserPasswordRequest {
 export class UsersController extends Controller {
 
     /**
-     * @param createUser Route to create user
-     * @example user  {
+     * @example user {
      *   "username": "test-user"
      * }
      */
@@ -41,6 +40,11 @@ export class UsersController extends Controller {
         return data;
     }
 
+    /**
+     * @example user {
+     *   "firstName": "test-name"
+     * }
+     */
     @Security('api_key')
     @Put('/{id}')
     async updateUserById(@Request() req: express.Request, @Path() id: string, @Body() user: UpdateUserRequest) {
@@ -57,6 +61,11 @@ export class UsersController extends Controller {
         return data;
     }
 
+    /**
+     * @example payload {
+     *   "password": "test-pass"
+     * }
+     */
     @Security('api_key')
     @Patch('/{id}')
     async updatePasswordById(@Request() req: express.Request, @Path() id: string, @Body() payload: UpdateUserPasswordRequest) {
