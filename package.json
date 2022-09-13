@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "start": "ts-node-dev --transpile-only --respawn src/index.ts",
+    "build": "tsc",
     "setup:dotenv": "shx test -f .env || cp example-env .env",
     "up:keycloak": "docker-compose up -d",
     "down:keycloak": "docker-compose down",
@@ -30,5 +31,10 @@
   },
   "devDependencies": {
     "ts-node-dev": "^2.0.0"
-  }
+  },
+  "engines": {
+    "node": ">=16",
+    "npm": ">=7"
+  },
+  "engineStrict" : true
 }

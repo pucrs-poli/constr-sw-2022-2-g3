@@ -4,7 +4,7 @@
 
 ### **Docker(keycloak) + Node(api)**
 
-Obrigatório:
+Requisitos:
 - Docker
 - Node 16+ (certifique-se que o npm está na versão 7 para cima)
 
@@ -25,3 +25,7 @@ Passos para parar:
 ## COMO que eu USO isso???
 
 TBD (rotas, swagger...)
+
+## Erros
+
+- `npm ERR! code EBADENGINE`, solução: Instale a versão correta do node, para facilitar use o [NVM](https://github.com/nvm-sh/nvm).
