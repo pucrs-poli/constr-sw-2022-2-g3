@@ -22,9 +22,22 @@ Passos para parar:
 - Feche o terminal da api rest
 - Execute `npm run down:keycloak`
 
+### **Docker com tudo**
+Requisitos:
+- Docker
+- Node (opcional)
+
+Passos para iniciar:
+- `docker-compose up -d --build` ou `npm run up:all`
+
+Passos para parar:
+- `docker-compose down` ou `npm run down:all`
+
 ## COMO que eu USO isso???
 
-TBD (rotas, swagger...)
+Inicie a api rest.
+
+Documentação das rotas com Swagger: [http://127.0.0.1:3000/docs](http://127.0.0.1:3000/docs)
 
 ## Erros
 

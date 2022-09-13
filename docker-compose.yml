@@ -1,8 +1,4 @@
 version: '3.4'
-networks:
-  constr-sw-2022-2:
-volumes:
-  keycloak-data:
 services:
   keycloak:
     container_name: keycloak
@@ -18,3 +14,13 @@ services:
       - keycloak-data:/opt/jboss/keycloak/standalone/data
     networks:
       - constr-sw-2022-2
+  api:
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=production
+networks:
+  constr-sw-2022-2:
+volumes:
+  keycloak-data:
