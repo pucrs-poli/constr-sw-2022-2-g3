@@ -65,16 +65,10 @@ export interface KeycloakUserRepresentation {
 }
 
 export type KeycloakCreateUserRequest = KeycloakUserRepresentation;
-
 export type KeycloakCreateUserResponse = KeycloakResponse<{}>;
 
 export type KeycloakUpdateUserRequest = KeycloakUserRepresentation;
-
 export type KeycloakUpdateUserResponse = KeycloakResponse<{}>;
-
-export interface KeycloakSetUserPasswordRequest {
-    password: string;
-}
 
 export class KeycloakClient {
     public static async login(clientId: string, username: string, password: string): Promise<KeycloakLoginResponse> {
@@ -100,7 +94,7 @@ export class KeycloakClient {
     public static async createUser(token: string, body: KeycloakCreateUserRequest): Promise<KeycloakCreateUserResponse> {
         const url = process.env.KEYCLOAK_AUTH_SERVER_URL;
         const realm = process.env.KEYCLOAK_REALM;
-        return new Promise<{status: number, data: any[]}>(resolve => {
+        return new Promise<{status: number, data: any}>(resolve => {
             request({
                 url: `${url}/admin/realms/${realm}/users`,
                 method: 'POST',
@@ -131,7 +125,7 @@ export class KeycloakClient {
     public static async getUserById(token: string, id: string) {
         const url = process.env.KEYCLOAK_AUTH_SERVER_URL;
         const realm = process.env.KEYCLOAK_REALM;
-        return new Promise<{status: number, data: any[]}>(resolve => {
+        return new Promise<{status: number, data: any}>(resolve => {
             request({
                 url: `${url}/admin/realms/${realm}/users/${id}`,
                 method: 'GET',
@@ -146,7 +140,7 @@ export class KeycloakClient {
     public static async deleteUserById(token: string, id: string) {
         const url = process.env.KEYCLOAK_AUTH_SERVER_URL;
         const realm = process.env.KEYCLOAK_REALM;
-        return new Promise<{status: number, data: any[]}>(resolve => {
+        return new Promise<{status: number, data: any}>(resolve => {
             request({
                 url: `${url}/admin/realms/${realm}/users/${id}`,
                 method: 'DELETE',
@@ -162,7 +156,7 @@ export class KeycloakClient {
     public static async updateUserById(token: string, id: string, body: KeycloakUpdateUserRequest): Promise<KeycloakUpdateUserResponse> {
         const url = process.env.KEYCLOAK_AUTH_SERVER_URL;
         const realm = process.env.KEYCLOAK_REALM;
-        return new Promise<{status: number, data: any[]}>(resolve => {
+        return new Promise<{status: number, data: any}>(resolve => {
             request({
                 url: `${url}/admin/realms/${realm}/users/${id}`,
                 method: 'PUT',
@@ -175,17 +169,15 @@ export class KeycloakClient {
         });
     }
 
-    // FIXME: Doesnt work
-    public static async setUserPassword(token: string, id: string, body: KeycloakSetUserPasswordRequest) {
+    public static async setUserPassword(token: string, id: string, password: string) {
         const url = process.env.KEYCLOAK_AUTH_SERVER_URL;
         const realm = process.env.KEYCLOAK_REALM;
         const a = {
             type: 'password',
             temporary: false,
-            value: body.password,
+            value: password,
         }
-        console.log('a', a)
-        return new Promise<{status: number, data: any[]}>(resolve => {
+        return new Promise<{status: number, data: any}>(resolve => {
             request({
                 url: `${url}/admin/realms/${realm}/users/${id}/reset-password`,
                 method: 'PUT',
