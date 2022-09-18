@@ -87,7 +87,7 @@ export class KeycloakClient {
                     grant_type: 'password',
                 },
                 json: true,
-            }, (_, response, body) => resolve({status: response.statusCode, data: body}));
+            }, (_, response, body) => resolve({status: response?.statusCode || 500, data: body}));
         });
     }
 
@@ -103,7 +103,7 @@ export class KeycloakClient {
                 },
                 body,
                 json: true,
-            }, (_, response, body) => resolve({status: response.statusCode, data: body}));
+            }, (_, response, body) => resolve({status: response?.statusCode || 500, data: body}));
         });
     }
 
@@ -118,7 +118,7 @@ export class KeycloakClient {
                     Authorization: 'Bearer ' + token,
                 },
                 json: true,
-            }, (_, response, body) => resolve({status: response.statusCode, data: body}));
+            }, (_, response, body) => resolve({status: response?.statusCode || 500, data: body}));
         });
     }
 
@@ -133,7 +133,7 @@ export class KeycloakClient {
                     Authorization: 'Bearer ' + token,
                 },
                 json: true,
-            }, (_, response, body) => resolve({status: response.statusCode, data: body}));
+            }, (_, response, body) => resolve({status: response?.statusCode || 500, data: body}));
         });
     }
 
@@ -148,7 +148,7 @@ export class KeycloakClient {
                     Authorization: 'Bearer ' + token,
                 },
                 json: true,
-            }, (_, response, body) => resolve({status: response.statusCode, data: body}));
+            }, (_, response, body) => resolve({status: response?.statusCode || 500, data: body}));
         });
     }
     
@@ -165,7 +165,7 @@ export class KeycloakClient {
                 },
                 body,
                 json: true,
-            }, (_, response, body) => resolve({status: response.statusCode, data: body}));
+            }, (_, response, body) => resolve({status: response?.statusCode || 500, data: body}));
         });
     }
 
@@ -186,7 +186,7 @@ export class KeycloakClient {
                 },
                 body: a,
                 json: true,
-            }, (_, response, body) => resolve({status: response.statusCode, data: body}));
+            }, (_, response, body) => resolve({status: response?.statusCode || 500, data: body}));
         });
     }
 }

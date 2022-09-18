@@ -12,11 +12,7 @@ Passos para iniciar:
 - Instale as dependências `npm i`
 - Inicie o keycloak `npm run up:keycloak`
 - Inicie a api rest `npm start`
-- Abra o url `http://localhost:8080/auth`
-- Clique em `Administration Console`
-- Logue com user `admin` e senha `a12345678`
-- Importe o REALM do keycloak (selecione o arquivo `keycloak-realm-export.json` dentro da pasta do projeto) (**`MARQUE O SKIP!!!`**):
-![](docs/images/realm-import.png)
+- **Obs**: O import do realm é automático!
 
 Passos para parar:
 - Feche o terminal da api rest
