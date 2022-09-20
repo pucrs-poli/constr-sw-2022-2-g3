@@ -5,13 +5,18 @@ export interface KeycloakResponse<T> {
     data: T,
 }
 
-export type KeycloakLoginResponse = KeycloakResponse<{
+export type KeycloakLoginResponse = KeycloakResponse<KeycloakAuth>;
+
+export type KeycloakRefreshResponse = KeycloakResponse<KeycloakAuth>;
+
+export interface KeycloakAuth {
     token_type: string;
     access_token: string;
     expires_in: number;
     refresh_token: string;
     refresh_expires_in: number;
-}>;
+}
+
 
 export interface KeycloakUserConsentRepresentation {
     clientId?: string;
@@ -85,6 +90,25 @@ export class KeycloakClient {
                     username,
                     password,
                     grant_type: 'password',
+                },
+                json: true,
+            }, (_, response, body) => resolve({status: response?.statusCode || 500, data: body}));
+        });
+    }
+
+    public static async refresh(clientId: string, refresh_token: string): Promise<KeycloakRefreshResponse> {
+        const url = process.env.KEYCLOAK_AUTH_SERVER_URL;
+        const realm = process.env.KEYCLOAK_REALM;
+        const secret = process.env.KEYCLOAK_SECRET;
+        return new Promise(resolve => {
+            request({
+                url: `${url}/realms/${realm}/protocol/openid-connect/token`,
+                method: 'POST',
+                form: {
+                    client_id: clientId,
+                    client_secret: secret,
+                    refresh_token,                                    
+                    grant_type: 'refresh_token',
                 },
                 json: true,
             }, (_, response, body) => resolve({status: response?.statusCode || 500, data: body}));

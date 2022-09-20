@@ -7,6 +7,11 @@ export interface LoginRequest {
     password: string
 }
 
+export interface RefreshRequest {
+    client_id: string,
+    refresh_token: string   
+}
+
 @Route('/')
 export class AuthController extends Controller {
     /**
@@ -21,6 +26,14 @@ export class AuthController extends Controller {
     async login(@Body() body: LoginRequest) {
         const { client_id, username, password } = body;
         const { data, status } = await KeycloakClient.login(client_id, username, password);
+        this.setStatus(status);
+        return data;
+    }
+
+    @Post('/refresh')
+    async refresh(@Body() body: RefreshRequest) {
+        const { client_id,refresh_token} = body;
+        const { data, status } = await KeycloakClient.refresh(client_id, refresh_token);
         this.setStatus(status);
         return data;
     }
