@@ -5,7 +5,7 @@
   "scripts": {
     "start": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
     "build": "tsoa spec-and-routes && tsc",
-    "setup:dotenv": "shx test -f .env || cp example-env .env || true",
+    "setup:dotenv": "shx cp -n example-env .env",
     "up:all": "docker-compose up -d --build",
     "down:all": "docker-compose down",
     "up:keycloak": "docker-compose up -d keycloak",
