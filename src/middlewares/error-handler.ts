@@ -10,7 +10,7 @@ export function RegisterErrorHandler(app: Express) {
     ) {
         if (err instanceof ValidateError) {
             console.warn(`Caught Validation Error for ${req.path}:`, err.fields);
-            return res.status(422).json({
+            return res.status(400).json({
                 message: "Validation Failed",
                 details: err?.fields,
             });

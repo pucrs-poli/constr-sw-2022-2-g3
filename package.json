@@ -5,7 +5,7 @@
   "scripts": {
     "start": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
     "build": "tsoa spec-and-routes && tsc",
-    "setup:dotenv": "shx cp -n example-env .env",
+    "setup:dotenv": "node setup-dotenv.js",
     "up:all": "docker-compose up -d --build",
     "down:all": "docker-compose down",
     "up:keycloak": "docker-compose up -d keycloak",
@@ -34,7 +34,6 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.19",
     "request": "^2.88.2",
-    "shx": "^0.3.4",
     "swagger-ui-express": "^4.5.0",
     "ts-node": "^10.9.1",
     "tsoa": "^4.1.2",

@@ -1,6 +1,6 @@
 FROM node:16-alpine
 WORKDIR /app
-COPY package*.json ./
+COPY package*.json setup-dotenv.js ./
 RUN npm ci
 COPY . .
 RUN npm run build
