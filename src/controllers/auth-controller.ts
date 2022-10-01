@@ -1,5 +1,5 @@
 import { Body, Controller, Post, Route } from "tsoa";
-import { KeycloakClient } from "../clients/keycloak-client";
+import { AuthService } from "../services/auth-service";
 
 export interface LoginRequest {
     client_id: string,
@@ -24,17 +24,11 @@ export class AuthController extends Controller {
      */
     @Post('/login')
     async login(@Body() body: LoginRequest) {
-        const { client_id, username, password } = body;
-        const { data, status } = await KeycloakClient.login(client_id, username, password);
-        this.setStatus(status);
-        return data;
+        return AuthService.login(body);
     }
 
     @Post('/refresh')
     async refresh(@Body() body: RefreshRequest) {
-        const { client_id,refresh_token} = body;
-        const { data, status } = await KeycloakClient.refresh(client_id, refresh_token);
-        this.setStatus(status);
-        return data;
+        return AuthService.refresh(body);
     }
 }

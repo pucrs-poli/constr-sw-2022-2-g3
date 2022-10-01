@@ -1,12 +1,6 @@
 import express from 'express';
-import { Body, Controller, Delete, Get, Patch, Path, Post, Put, Request, Route, Security } from "tsoa";
-import { KeycloakClient, KeycloakUserRepresentation } from "../clients/keycloak-client";
-
-export type CreateUserRequest = KeycloakUserRepresentation;
-export type UpdateUserRequest = KeycloakUserRepresentation;
-export interface UpdateUserPasswordRequest {
-    password: string;
-}
+import { Body, Controller, Delete, Get, Patch, Path, Post, Put, Request, Response, Route, Security, SuccessResponse } from "tsoa";
+import { CreateUserRequest, UpdateUserPasswordRequest, UpdateUserRequest, UsersService } from '../services/users-service';
 
 @Route('/users')
 export class UsersController extends Controller {
@@ -18,26 +12,23 @@ export class UsersController extends Controller {
      */
     @Security('api_key')
     @Post('/')
+    @SuccessResponse('201')
     async createUser(@Request() req: express.Request, @Body() user: CreateUserRequest) {
-        const { data, status } = await KeycloakClient.createUser(req.user.token, user);
-        this.setStatus(status);
-        return data;
+        return UsersService.createUser(req.user.token, user);
     }
 
     @Security('api_key')
     @Get('/')
+    @SuccessResponse('200')
     async getUsers(@Request() req: express.Request) {
-        const { data, status } = await KeycloakClient.getUsers(req.user.token);
-        this.setStatus(status);
-        return data;
+        return UsersService.getUsers(req.user.token);
     }
 
     @Security('api_key')
     @Get('/{id}')
+    @SuccessResponse('200')
     async getUserById(@Request() req: express.Request, @Path() id: string) {
-        const { data, status } = await KeycloakClient.getUserById(req.user.token, id);
-        this.setStatus(status);
-        return data;
+        return UsersService.getUserById(req.user.token, id);
     }
 
     /**
@@ -47,18 +38,16 @@ export class UsersController extends Controller {
      */
     @Security('api_key')
     @Put('/{id}')
+    @SuccessResponse('200')
     async updateUserById(@Request() req: express.Request, @Path() id: string, @Body() user: UpdateUserRequest) {
-        const { data, status } = await KeycloakClient.updateUserById(req.user.token, id, user);
-        this.setStatus(status);
-        return data;
+        return UsersService.updateUserById(req.user.token, id, user);
     }
 
     @Security('api_key')
     @Delete('/{id}')
+    @SuccessResponse('200')
     async deleteUserById(@Request() req: express.Request, @Path() id: string) {
-        const { data, status } = await KeycloakClient.deleteUserById(req.user.token, id);
-        this.setStatus(status);
-        return data;
+        return UsersService.deleteUserById(req.user.token, id);
     }
 
     /**
@@ -68,9 +57,8 @@ export class UsersController extends Controller {
      */
     @Security('api_key')
     @Patch('/{id}')
+    @SuccessResponse('200')
     async updatePasswordById(@Request() req: express.Request, @Path() id: string, @Body() payload: UpdateUserPasswordRequest) {
-        const { data, status } = await KeycloakClient.setUserPassword(req.user.token, id, payload.password);
-        this.setStatus(status);
-        return data;
+        return UsersService.updatePasswordById(req.user.token, id, payload);
     }
 }
