@@ -1,0 +1,12 @@
+{
+  "name": "keycloak",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "up": "docker-compose up -d",
+    "down": "docker-compose down"
+  },
+  "author": "",
+  "license": "ISC"
+}

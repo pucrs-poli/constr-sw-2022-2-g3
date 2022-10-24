@@ -1,10 +1,15 @@
 {
   "name": "constr-sw-2022-2-g3",
   "version": "1.0.0",
-  "description": "## COMO que eu INICIO isso???",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "up:backends": ""
+    "up": "npm run up:keycloak && npm run up:keycloak-api",
+    "up:keycloak": "cd keycloak && npm run up",
+    "up:keycloak-api": "cd keycloak-api && npm run up",
+    "down": "npm run down:keycloak && npm run down:keycloak-api",
+    "down:keycloak": "cd keycloak && npm run down",
+    "down:keycloak-api": "cd keycloak-api && npm run down"
   },
   "repository": {
     "type": "git",
