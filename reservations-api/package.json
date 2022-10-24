@@ -1,0 +1,47 @@
+{
+  "name": "constr-sw-2022-2-g3",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
+    "build": "tsoa spec-and-routes && tsc",
+    "setup:dotenv": "node setup-dotenv.js",
+    "up:all": "docker-compose up -d --build",
+    "down:all": "docker-compose down",
+    "up:keycloak": "docker-compose up -d keycloak",
+    "down:keycloak": "docker-compose down keycloak",
+    "postinstall": "npm run setup:dotenv"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pucrs-poli/constr-sw-2022-2-g3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pucrs-poli/constr-sw-2022-2-g3/issues"
+  },
+  "homepage": "https://github.com/pucrs-poli/constr-sw-2022-2-g3#readme",
+  "dependencies": {
+    "@types/express": "^4.17.13",
+    "@types/morgan": "^1.9.3",
+    "@types/node": "^18.7.17",
+    "@types/request": "^2.48.8",
+    "@types/swagger-ui-express": "^4.1.3",
+    "concurrently": "^7.4.0",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.19",
+    "request": "^2.88.2",
+    "swagger-ui-express": "^4.5.0",
+    "ts-node": "^10.9.1",
+    "tsoa": "^4.1.2",
+    "typescript": "^4.8.2"
+  },
+  "engines": {
+    "node": ">=16",
+    "npm": ">=7"
+  },
+  "engineStrict": true
+}
