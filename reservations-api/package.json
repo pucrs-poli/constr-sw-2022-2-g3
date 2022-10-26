@@ -1,15 +1,13 @@
 {
-  "name": "constr-sw-2022-2-g3",
+  "name": "reservations-api",
   "version": "1.0.0",
   "description": "",
   "scripts": {
     "start": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
     "build": "tsoa spec-and-routes && tsc",
     "setup:dotenv": "node setup-dotenv.js",
-    "up:all": "docker-compose up -d --build",
-    "down:all": "docker-compose down",
-    "up:keycloak": "docker-compose up -d keycloak",
-    "down:keycloak": "docker-compose down keycloak",
+    "up": "docker-compose up -d --build",
+    "down": "docker-compose down",
     "postinstall": "npm run setup:dotenv"
   },
   "repository": {
