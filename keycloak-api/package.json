@@ -1,5 +1,5 @@
 {
-  "name": "constr-sw-2022-2-g3",
+  "name": "keycloak-api",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pucrs-poli/constr-sw-2022-2-g3.git"
+    "url": "git+https://github.com/pucrs-poli/keycloak-api.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pucrs-poli/constr-sw-2022-2-g3/issues"
+    "url": "https://github.com/pucrs-poli/keycloak-api/issues"
   },
-  "homepage": "https://github.com/pucrs-poli/constr-sw-2022-2-g3#readme",
+  "homepage": "https://github.com/pucrs-poli/keycloak-api#readme",
   "dependencies": {
     "@types/express": "^4.17.13",
     "@types/morgan": "^1.9.3",
