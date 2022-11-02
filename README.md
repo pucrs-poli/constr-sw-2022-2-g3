@@ -1,39 +1,35 @@
 # Constr SW 2022/2 - Grupo 3
 
-## COMO que eu INICIO isso???
-
-### **Docker(keycloak) + Node(api)**
+## Uso
 
 Requisitos:
 - Docker
 - Node 16+ (certifique-se que o npm está na versão 7 para cima)
 
-Passos para iniciar:
-- Instale as dependências `npm i`
-- Inicie o keycloak `npm run up:keycloak`
-- Inicie a api rest `npm start`
-- **Obs**: O import do realm é automático!
+Subir toda aplicação (keycloak, keycloak-api, reservations-api)
+```
+npm run up
+```
 
-Passos para parar:
-- Feche o terminal da api rest
-- Execute `npm run down:keycloak`
+Subir keycloak
+```
+npm run up:keycloak
+```
 
-### **Docker com tudo**
-Requisitos:
-- Docker
-- Node (opcional)
+Subir keycloak-api
+```
+npm run up:keycloak-api
+```
 
-Passos para iniciar:
-- `docker-compose up -d --build` ou `npm run up:all`
+Subir reservations-api
+```
+npm run up:reservations-api
+```
 
-Passos para parar:
-- `docker-compose down` ou `npm run down:all`
+## Documentação
 
-## COMO que eu USO isso???
-
-Inicie a api rest.
-
-Documentação das rotas com Swagger: [http://127.0.0.1:3000/docs](http://127.0.0.1:3000/docs)
+Documentação das rotas com Swagger (keycloak-api): [http://127.0.0.1:3000/docs](http://127.0.0.1:3000/docs)
+Documentação das rotas com Swagger (reservations-api): [http://127.0.0.1:3001/docs](http://127.0.0.1:3001/docs)
 
 ## Erros
 

@@ -3,6 +3,5 @@ node_modules/
 docs/
 Dockerfile
 docker-compose.yml
-keycloak-realm-export.json
 README.md
 .env

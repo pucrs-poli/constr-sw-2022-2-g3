@@ -1,19 +1,6 @@
 version: '3.4'
 services:
-  postgresql:
-    container_name: postgresql
-    image: postgres:latest
-    ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
-      - PGDATA=/var/lib/postgresql/data/pgdata
-      - POSTGRES_PASSWORD=a12345678
-    volumes:
-      - postgresql-data:/var/lib/postgresql/data
-    networks:
-      - grupo3
-  api:
+  keycloak-api:
     build: .
     ports:
       - 3000:3000
@@ -28,5 +15,3 @@ services:
 networks:
   grupo3:
     external: true
-volumes:
-  postgresql-data:

@@ -1,0 +1,32 @@
+version: '3.4'
+services:
+  postgresql:
+    container_name: postgresql
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_PASSWORD=a12345678
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    networks:
+      - grupo3
+  reservations-api:
+    build: .
+    ports:
+      - 3001:3001
+    environment:
+      - NODE_ENV=production
+      - DB_PASSWORD=a12345678
+      - DB_HOST=postgresql
+      - DB_PORT=5432
+      - DB_USER=postgres
+    networks:
+      - grupo3
+networks:
+  grupo3:
+    external: true
+volumes:
+  postgresql-data:
