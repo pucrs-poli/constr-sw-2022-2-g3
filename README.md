@@ -6,25 +6,20 @@ Requisitos:
 - Docker
 - Node 16+ (certifique-se que o npm está na versão 7 para cima)
 
+### Subir toda a aplicação
+
 Subir toda aplicação (keycloak, keycloak-api, reservations-api)
-```
-npm run up
-```
 
-Subir keycloak
-```
-npm run up:keycloak
-```
+`npm run up`
 
-Subir keycloak-api
-```
-npm run up:keycloak-api
-```
+### Subir módulos específicos
 
-Subir reservations-api
-```
-npm run up:reservations-api
-```
+Subir isoladamente a keycloak-api
+
+`npm run up -- keycloak keycloak-api`
+
+Subir isoladamente a reservations-api
+`npm run up -- postgresql reservations-api`
 
 ## Documentação
 

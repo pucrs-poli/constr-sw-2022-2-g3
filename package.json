@@ -4,15 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "up": "npm run up:keycloak && npm run up:keycloak-api && npm run up:reservations-api",
     "up:network": "docker network create grupo3",
-    "up:keycloak": "cd keycloak && npm run up",
-    "up:keycloak-api": "cd keycloak-api && npm run up",
-    "up:reservations-api": "cd reservations-api && npm run up",
-    "down": "npm run down:keycloak && npm run down:keycloak-api && npm run down:reservations-api",
-    "down:keycloak": "cd keycloak && npm run down",
-    "down:keycloak-api": "cd keycloak-api && npm run down",
-    "down:reservations-api": "cd reservations-api && npm run down"
+    "up": "docker-compose up -d --build",
+    "down": "docker-compose down"
   },
   "repository": {
     "type": "git",

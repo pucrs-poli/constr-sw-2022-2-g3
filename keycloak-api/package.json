@@ -6,8 +6,6 @@
     "start": "concurrently \"nodemon\" \"nodemon -x tsoa spec-and-routes\"",
     "build": "tsoa spec-and-routes && tsc",
     "setup:dotenv": "node setup-dotenv.js",
-    "up": "docker-compose up -d --build",
-    "down": "docker-compose down",
     "postinstall": "npm run setup:dotenv"
   },
   "repository": {

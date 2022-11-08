@@ -1,0 +1,69 @@
+version: '3.4'
+
+services:
+  keycloak:
+    container_name: keycloak
+    image: jboss/keycloak:latest
+    ports:
+      - 8080:8080
+      - 9990:9990
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=a12345678
+      - KEYCLOAK_FRONTEND_URL=http://localhost:8080/auth
+      #- KEYCLOAK_FRONTEND_URL=https://8080-pucrspoli-constrsw20222-j5tvhlb4zz6.ws-us65.gitpod.io/auth
+    volumes:
+      - keycloak-data:/opt/jboss/keycloak/standalone/data
+      - ./keycloak/keycloak-realm-export.json:/tmp/realm.json
+    command:
+      # jboss/keycloak realm import doesn't work at all
+      - -Dkeycloak.migration.action=import -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=/tmp/realm.json -Dkeycloak.migration.strategy=OVERWRITE_EXISTING
+    networks:
+      - grupo3
+
+  keycloak-api:
+    build: keycloak-api
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=production
+      - KEYCLOAK_REALM=master
+      - KEYCLOAK_AUTH_SERVER_URL=http://keycloak:8080/auth
+      - KEYCLOAK_RESOURCE=grupo3
+      - KEYCLOAK_SECRET=UHnzM10qJ5j2PZjIqaMwMKrA81r2vqpW
+    networks:
+      - grupo3
+
+  postgresql:
+    container_name: postgresql
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_PASSWORD=a12345678
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    networks:
+      - grupo3
+
+  reservations-api:
+    build: reservations-api
+    ports:
+      - 3001:3001
+    environment:
+      - NODE_ENV=production
+      - DB_PASSWORD=a12345678
+      - DB_HOST=postgresql
+      - DB_PORT=5432
+      - DB_USER=postgres
+    networks:
+      - grupo3
+
+networks:
+  grupo3:
+    external: true
+volumes:
+  keycloak-data:
+  postgresql-data:
