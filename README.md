@@ -19,6 +19,7 @@ Subir isoladamente a keycloak-api
 `npm run up -- keycloak keycloak-api`
 
 Subir isoladamente a reservations-api
+
 `npm run up -- postgresql reservations-api`
 
 ## Documentação
