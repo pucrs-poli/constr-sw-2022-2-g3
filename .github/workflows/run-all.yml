@@ -1,0 +1,9 @@
+name: Run All
+on: [push]
+jobs:
+  run-all:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run all
+        run: npm run up
