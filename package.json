@@ -6,7 +6,8 @@
   "scripts": {
     "up:network": "docker network create grupo3",
     "up": "docker-compose up -d --build",
-    "down": "docker-compose down"
+    "down": "docker-compose down",
+    "submodules:update": "git submodule update --init"
   },
   "repository": {
     "type": "git",
