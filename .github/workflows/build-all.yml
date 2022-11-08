@@ -12,8 +12,8 @@ jobs:
         with:
           node-version: 16
       - name: Install dependencies
-        working-directory: ./{{ matrix.api-name }}
+        working-directory: ./${{ matrix.api-name }}
         run: npm i
       - name: Build
-        working-directory: ./{{ matrix.api-name }}
+        working-directory: ./${{ matrix.api-name }}
         run: npm run build
