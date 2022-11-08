@@ -1,13 +1,9 @@
 
 export interface Reservation {
-    id: number,
+    id: string,
     start_date: Date,
     end_date: Date,
-    status: ReservationStatus,
     observation: string,
-}
-
-export enum ReservationStatus {
-    Busy = 'BUSY',
-    Free = 'FREE',
+    resource_id: string,
+    active: boolean,
 }

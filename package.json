@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "up": "npm run up:keycloak && npm run up:keycloak-api && npm run up:reservations-api",
+    "up:network": "docker network create grupo3",
     "up:keycloak": "cd keycloak && npm run up",
     "up:keycloak-api": "cd keycloak-api && npm run up",
     "up:reservations-api": "cd reservations-api && npm run up",

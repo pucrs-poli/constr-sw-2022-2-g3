@@ -1,6 +1,11 @@
+import { BaseError } from "./base-error";
 
-export class InvalidEmailError extends Error {
+export class InvalidEmailError extends BaseError<unknown> {
     constructor(public email?: string) {
-        super()
+        super(400, 'Invalid email',  {
+            'user.email': {
+                message: 'Invalid email'
+            },
+        });
     }
 }
