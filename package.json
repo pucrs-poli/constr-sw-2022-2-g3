@@ -7,7 +7,9 @@
     "up:network": "docker network create grupo3",
     "up": "docker-compose up -d --build",
     "down": "docker-compose down",
-    "submodules:update": "git submodule update --init"
+    "submodules:update": "git submodule update --init",
+    "test": "cd tests && npm t",
+    "test:watch": "cd tests && npm run test:watch"
   },
   "repository": {
     "type": "git",

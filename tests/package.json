@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha integration/**/*.ts"
+    "test": "mocha src/**/*.spec.ts",
+    "test:watch": "npm t -- --watch --watch-files src/**/*.ts"
   },
   "author": "",
   "license": "ISC",

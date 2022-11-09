@@ -17,5 +17,5 @@ RegisterRoutes(app);
 RegisterErrorHandler(app);
 app.listen(3001, () => console.log('Listening on 3001'));
 connectDatabase().then(() => {
-    ReservationsRepository.setup();
+    ReservationsRepository.reset();
 });

@@ -4,7 +4,7 @@ import { Reservation } from "../models/reservations";
 import { genUuid } from "../utils/uuid";
 
 export class ReservationsRepository {
-    static async setup() {
+    static async reset() {
         await this.setupDatabaseSchema();
         await this.seedDatabase();
     }
