@@ -42,7 +42,7 @@ export class ReservationsController extends Controller {
     }
 
     @Post('/')
-    @SuccessResponse('200')
+    @SuccessResponse('201')
     @Security('api_key', ['coordenadores', 'professores'])
     async create(@Body() body: CreateReservationDto) {
         return await ReservationsService.create(body);

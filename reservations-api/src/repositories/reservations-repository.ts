@@ -30,6 +30,7 @@ export class ReservationsRepository {
 
     private static async seedDatabase() {
         const classId1 = '10000000-0000-0000-0000-000000000001';
+        const classId2 = '10000000-0000-0000-0000-000000000002';
         const resourceId1 = '00000000-0000-0000-0000-000000000001';
         await this.create({
             observation: 'Observation 1',
@@ -39,7 +40,7 @@ export class ReservationsRepository {
         });
         await this.create({
             observation: 'Observation 2',
-            class_id: classId1,
+            class_id: classId2,
             resource_id: resourceId1,
             active: true,
         });
