@@ -51,9 +51,10 @@ services:
   reservations-api:
     build: reservations-api
     ports:
-      - 3001:3001
+      - 8083:8083
     environment:
       - NODE_ENV=production
+      - KEYCLOAK_API_SERVER_URL=http://keycloak-api:3000
       - DB_PASSWORD=a12345678
       - DB_HOST=postgresql
       - DB_PORT=5432
