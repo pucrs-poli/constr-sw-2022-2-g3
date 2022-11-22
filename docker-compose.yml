@@ -30,7 +30,7 @@ services:
       - KEYCLOAK_REALM=constr-sw-2022-2
       - KEYCLOAK_AUTH_SERVER_URL=http://keycloak:8080/auth
       - KEYCLOAK_RESOURCE=grupoX
-      - KEYCLOAK_SECRET=yDR6zRgDJaobphwFMLxCOwavFJgIb8In
+      - KEYCLOAK_SECRET=TB5t48zpxSM1qqj7rR4G6WxucHmAjmWE
     networks:
       - grupo3
 

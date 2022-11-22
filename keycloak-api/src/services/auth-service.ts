@@ -3,7 +3,10 @@ import { UnauthorizedError } from "../errors/unauthorized-error";
 
 export interface LoginRequest {
     username: string,
-    password: string
+    password: string,
+    client_id?: string;
+    client_secret?: string;
+    realm?: string;
 }
 
 export interface RefreshRequest {
@@ -12,8 +15,8 @@ export interface RefreshRequest {
 
 export class AuthService {
     static async login(loginRequest: LoginRequest) {
-        const { username, password } = loginRequest;
-        const { data, status } = await KeycloakClient.login(username, password);
+        const { username, password, client_id, client_secret, realm } = loginRequest;
+        const { data, status } = await KeycloakClient.login(username, password, realm, client_id, client_secret);
         if (status === 401) throw new UnauthorizedError();
         return data;
     }
