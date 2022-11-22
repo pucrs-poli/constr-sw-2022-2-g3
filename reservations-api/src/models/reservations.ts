@@ -1,9 +1,8 @@
 
 export interface Reservation {
     id: string,
-    start_date: Date,
-    end_date: Date,
     observation: string,
+    class_id: string,
     resource_id: string,
     active: boolean,
 }
