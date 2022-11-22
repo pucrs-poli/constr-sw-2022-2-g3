@@ -9,13 +9,15 @@ import { RegisterParsers } from './middlewares/parsers';
 import { RegisterSwagger } from './middlewares/swagger';
 import { ReservationsRepository } from './repositories/reservations-repository';
 
+const port = parseInt(process.env.PORT || '8083');
+
 const app = express();
 RegisterLogger(app);
 RegisterParsers(app);
 RegisterSwagger(app);
 RegisterRoutes(app);
 RegisterErrorHandler(app);
-app.listen(3001, () => console.log('Listening on 3001'));
+app.listen(port, () => console.log(`Listening on ${port}`));
 connectDatabase().then(() => {
     ReservationsRepository.reset();
 });
