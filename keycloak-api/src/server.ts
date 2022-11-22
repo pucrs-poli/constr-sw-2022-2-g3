@@ -7,10 +7,12 @@ import { RegisterLogger } from './middlewares/logger';
 import { RegisterParsers } from './middlewares/parsers';
 import { RegisterSwagger } from './middlewares/swagger';
 
+const port = parseInt(process.env.PORT || '3000');
+
 const app = express();
 RegisterLogger(app);
 RegisterParsers(app);
 RegisterSwagger(app);
 RegisterRoutes(app);
 RegisterErrorHandler(app);
-app.listen(3000, () => console.log('Listening on 3000'));
+app.listen(port, () => console.log(`Listening on ${port}`));

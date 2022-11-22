@@ -76,10 +76,11 @@ export type KeycloakUpdateUserRequest = KeycloakUserRepresentation;
 export type KeycloakUpdateUserResponse = KeycloakResponse<{}>;
 
 export class KeycloakClient {
-    public static async login(clientId: string, username: string, password: string): Promise<KeycloakLoginResponse> {
+    public static async login(username: string, password: string): Promise<KeycloakLoginResponse> {
         const url = process.env.KEYCLOAK_AUTH_SERVER_URL;
         const realm = process.env.KEYCLOAK_REALM;
         const secret = process.env.KEYCLOAK_SECRET;
+        const clientId = process.env.KEYCLOAK_RESOURCE;
         return new Promise(resolve => {
             request({
                 url: `${url}/realms/${realm}/protocol/openid-connect/token`,
@@ -96,10 +97,11 @@ export class KeycloakClient {
         });
     }
 
-    public static async refresh(clientId: string, refresh_token: string): Promise<KeycloakRefreshResponse> {
+    public static async refresh(refresh_token: string): Promise<KeycloakRefreshResponse> {
         const url = process.env.KEYCLOAK_AUTH_SERVER_URL;
         const realm = process.env.KEYCLOAK_REALM;
         const secret = process.env.KEYCLOAK_SECRET;
+        const clientId = process.env.KEYCLOAK_RESOURCE;
         return new Promise(resolve => {
             request({
                 url: `${url}/realms/${realm}/protocol/openid-connect/token`,

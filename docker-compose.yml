@@ -10,8 +10,8 @@ services:
     environment:
       - KEYCLOAK_USER=admin
       - KEYCLOAK_PASSWORD=a12345678
-      - KEYCLOAK_FRONTEND_URL=http://localhost:8080/auth
-      #- KEYCLOAK_FRONTEND_URL=https://8080-pucrspoli-constrsw20222-j5tvhlb4zz6.ws-us65.gitpod.io/auth
+      #- KEYCLOAK_FRONTEND_URL=http://localhost:8080/auth
+      - KEYCLOAK_FRONTEND_URL=https://8080-pucrspoli-constrsw20222-j5tvhlb4zz6.ws-us77.gitpod.io/auth
     volumes:
       - keycloak-data:/opt/jboss/keycloak/standalone/data
       - ./keycloak/keycloak-realm-export.json:/tmp/realm.json
@@ -27,10 +27,10 @@ services:
       - 3000:3000
     environment:
       - NODE_ENV=production
-      - KEYCLOAK_REALM=master
+      - KEYCLOAK_REALM=constr-sw-2022-2
       - KEYCLOAK_AUTH_SERVER_URL=http://keycloak:8080/auth
-      - KEYCLOAK_RESOURCE=grupo3
-      - KEYCLOAK_SECRET=UHnzM10qJ5j2PZjIqaMwMKrA81r2vqpW
+      - KEYCLOAK_RESOURCE=grupoX
+      - KEYCLOAK_SECRET=yDR6zRgDJaobphwFMLxCOwavFJgIb8In
     networks:
       - grupo3
 

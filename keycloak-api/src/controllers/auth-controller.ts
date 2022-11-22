@@ -1,25 +1,13 @@
 import { Body, Controller, Post, Route } from "tsoa";
-import { AuthService } from "../services/auth-service";
-
-export interface LoginRequest {
-    client_id: string,
-    username: string,
-    password: string
-}
-
-export interface RefreshRequest {
-    client_id: string,
-    refresh_token: string   
-}
+import { AuthService, LoginRequest, RefreshRequest } from "../services/auth-service";
 
 @Route('/')
 export class AuthController extends Controller {
     /**
      * @param login Route to login users
      * @example body  {
-     *   "client_id": "grupo3",
-     *   "username": "admin",
-     *   "password": "a12345678"
+     *   "username": "user",
+     *   "password": "pass"
      * }
      */
     @Post('/login')
