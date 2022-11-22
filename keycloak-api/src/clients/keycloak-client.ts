@@ -75,6 +75,8 @@ export type KeycloakCreateUserResponse = KeycloakResponse<{}>;
 export type KeycloakUpdateUserRequest = KeycloakUserRepresentation;
 export type KeycloakUpdateUserResponse = KeycloakResponse<{}>;
 
+export type KeycloakGetUserInfoResponse = KeycloakResponse<KeycloakUserRepresentation>;
+
 export class KeycloakClient {
     public static async login(username: string, password: string): Promise<KeycloakLoginResponse> {
         const url = process.env.KEYCLOAK_AUTH_SERVER_URL;
@@ -111,6 +113,21 @@ export class KeycloakClient {
                     client_secret: secret,
                     refresh_token,                                    
                     grant_type: 'refresh_token',
+                },
+                json: true,
+            }, (_, response, body) => resolve({status: response?.statusCode || 500, data: body}));
+        });
+    }
+
+    public static async getUserInfo(token: string): Promise<KeycloakGetUserInfoResponse> {
+        const url = process.env.KEYCLOAK_AUTH_SERVER_URL;
+        const realm = process.env.KEYCLOAK_REALM;
+        return new Promise(resolve => {
+            request({
+                url: `${url}/realms/${realm}/protocol/openid-connect/userinfo`,
+                method: 'POST',
+                headers: {
+                    Authorization: 'Bearer ' + token,
                 },
                 json: true,
             }, (_, response, body) => resolve({status: response?.statusCode || 500, data: body}));

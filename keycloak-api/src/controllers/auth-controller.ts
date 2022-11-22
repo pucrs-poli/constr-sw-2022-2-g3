@@ -1,5 +1,7 @@
-import { Body, Controller, Post, Route } from "tsoa";
+import express from "express";
+import { Body, Controller, Get, Post, Request, Route, Security, SuccessResponse } from "tsoa";
 import { AuthService, LoginRequest, RefreshRequest } from "../services/auth-service";
+import { extractToken } from "../utils/functions";
 
 @Route('/')
 export class AuthController extends Controller {
@@ -18,5 +20,12 @@ export class AuthController extends Controller {
     @Post('/refresh')
     async refresh(@Body() body: RefreshRequest) {
         return AuthService.refresh(body);
+    }
+
+    @Get('/user-info')
+    @Security('api_key')
+    @SuccessResponse('200')
+    async getUserInfo(@Request() req: express.Request) {
+        return AuthService.getUserInfo(extractToken(req));
     }
 }

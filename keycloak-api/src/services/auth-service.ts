@@ -24,4 +24,10 @@ export class AuthService {
         if (status === 401) throw new UnauthorizedError();
         return data;
     }
+
+    static async getUserInfo(token: string) {
+        const { data, status } = await KeycloakClient.getUserInfo(token);
+        if (status === 401) throw new UnauthorizedError();
+        return data;
+    }
 }
