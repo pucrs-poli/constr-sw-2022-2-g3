@@ -9,7 +9,7 @@
     "up": "docker-compose up -d --build",
     "up:resources": "cd backend/recursos && docker-compose up -d",
     "down": "docker-compose down",
-    "down:resources": "cd backend/recursos && docker-compose up -d",
+    "down:resources": "cd backend/recursos && docker-compose down",
     "submodules:init": "git submodule update --init",
     "submodules:update": "git submodule foreach git pull origin main",
     "test": "cd tests && npm t",

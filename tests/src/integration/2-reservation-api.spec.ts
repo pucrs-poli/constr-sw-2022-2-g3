@@ -45,6 +45,7 @@ describe('Reservations api tests', () => {
             ));
             expect(item.id).to.be.an('string');
             expect(item.active).to.be.true;
+            expect(item.resource).to.be.an('object');
             done();
         });
     });
@@ -68,6 +69,7 @@ describe('Reservations api tests', () => {
             expect(res.body.resource_id).to.be.eq(createReservation.resource_id);
             expect(res.body.observation).to.be.eq(createReservation.observation);
             expect(res.body.active).to.be.true;
+            expect(res.body.resource).to.be.an('object');
             createdReservationId = res.body.id;
             done();
         });
@@ -116,6 +118,7 @@ describe('Reservations api tests', () => {
         })
         .end((err, res) => {
             expect(res.status).to.be.eq(200);
+            expect(res.body.resource).to.be.an('object');
             done();
         });
     });
@@ -132,6 +135,17 @@ describe('Reservations api tests', () => {
             expect(res.body.resource_id).to.be.eq('00000000-0000-0000-0000-000000000003');
             expect(res.body.observation).to.be.eq('Observation Test Updated');
             expect(res.body.active).to.be.false;
+            expect(res.body.resource).to.be.an('object');
+            done();
+        });
+    });
+
+    it('Delete reservation by id', (done) => {
+        chai.request('http://localhost:8083')
+        .delete(`/reservations/${createdReservationId}`)
+        .set('Authorization', authorization)
+        .end((err, res) => {
+            expect(res.status).to.be.eq(204);
             done();
         });
     });

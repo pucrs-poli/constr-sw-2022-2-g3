@@ -55,6 +55,8 @@ services:
     environment:
       - NODE_ENV=production
       - KEYCLOAK_API_SERVER_URL=http://keycloak-api:3000
+      - RESOURCES_API_SERVER_URL=http://resources-api:8082
+      - RESOURCES_API_MOCK=true
       - DB_PASSWORD=a12345678
       - DB_HOST=postgresql
       - DB_PORT=5432
