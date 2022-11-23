@@ -44,6 +44,10 @@ Documentação das rotas com Swagger (reservations-api): [http://127.0.0.1:3001/
 
 ## Testes
 
+Recomenda-se executá-los, pois eles inserem um usuário novo `user`:`pass` e alguns dados de reservas.
+
+`npm t`
+
 Foram feitos testes de integração para checar se o fluxo principal ocorre corretamente, é possível observálo no `Actions` rodando a cada push.
 
 Fluxo principal:
