@@ -8,7 +8,7 @@
     "up": "docker-compose up -d --build",
     "down": "docker-compose down",
     "submodules:init": "git submodule update --init",
-    "submodules:update": "git pull --recurse-submodules",
+    "submodules:update": "git submodule foreach git pull origin main",
     "test": "cd tests && npm t",
     "test:watch": "cd tests && npm run test:watch"
   },
