@@ -1,4 +1,5 @@
 import chai, { expect } from 'chai';
+import { sleep } from '../utils/functions';
 
 describe('Keycloak api tests', () => {
     let authorization: string;
@@ -21,7 +22,9 @@ describe('Keycloak api tests', () => {
         });
     }
 
-    it('Login as admin', (done) => {
+    it('Login as admin', function (done) {
+        console.log('Trying to login...');
+        this.retries(50);
         chai.request('http://localhost:3000')
         .post('/login')
         .send({
@@ -30,10 +33,16 @@ describe('Keycloak api tests', () => {
             realm: 'master',
             client_id: 'admin-cli'
         })
-        .end((err, res) => {
-            expect(res.status).to.be.eq(200);
-            authorization = res.body.access_token;
-            done();
+        .timeout(500)
+        .end(async (err, res) => {
+            try {
+                await sleep(1000);
+                expect(res.status).to.be.eq(200);
+                authorization = res.body.access_token;
+                done();
+            } catch (err) {
+                done(err);
+            }
         });
     });
 

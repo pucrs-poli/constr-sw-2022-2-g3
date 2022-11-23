@@ -15,4 +15,9 @@ RegisterParsers(app);
 RegisterSwagger(app);
 RegisterRoutes(app);
 RegisterErrorHandler(app);
-app.listen(port, () => console.log(`Listening on ${port}`));
+const server = app.listen(port, () => console.log(`Listening on ${port}`));
+
+// Cleanup routines
+const shutdown = () => server.close();
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);

@@ -88,7 +88,6 @@ export class KeycloakClient {
         const realm = _realm || process.env.KEYCLOAK_REALM;
         const client_id = _client_id || process.env.KEYCLOAK_RESOURCE;
         const client_secret = _client_secret || process.env.KEYCLOAK_SECRET;
-        console.log(realm, client_id, client_secret)
         const url = process.env.KEYCLOAK_AUTH_SERVER_URL;
         return new Promise(resolve => {
             request({
