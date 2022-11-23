@@ -22,10 +22,36 @@ Subir isoladamente a reservations-api
 
 `npm run up -- postgresql reservations-api`
 
+## Sub-módulos (backends dos outros grupos)
+
+### Inicializar sub-módulos
+
+`npm run submodules:init`
+
+### Atualizar sub-módulos
+
+`npm run submodules:update`
+
 ## Documentação
 
 Documentação das rotas com Swagger (keycloak-api): [http://127.0.0.1:3000/docs](http://127.0.0.1:3000/docs)
 Documentação das rotas com Swagger (reservations-api): [http://127.0.0.1:3001/docs](http://127.0.0.1:3001/docs)
+
+## Testes
+
+Foram feitos testes de integração para checar se o fluxo principal ocorre corretamente, é possível observálo no `Actions` rodando a cada push.
+
+Fluxo principal:
+- Login como admin (admin-cli)
+- Criar usuário
+- Atualizar senha do usuário
+- Logar como usuário de teste
+- Pegar lista de reservas
+- Criar reserva
+- Tentar criar reserva com conflito
+- Tentar atualizar reserva com conflito
+- Atualizar reserva
+- Pegar reserva por id
 
 ## Erros
 
