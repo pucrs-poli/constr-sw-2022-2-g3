@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "up:network": "docker network create grupo3",
+    "up:volumes": "docker volume create keycloak-data && docker volume create postgresql-data",
+    "up:network": "docker network create constr-sw-2022-2",
     "up": "docker-compose up -d --build",
+    "up:resources": "cd backend/recursos && docker-compose up -d",
     "down": "docker-compose down",
+    "down:resources": "cd backend/recursos && docker-compose up -d",
     "submodules:init": "git submodule update --init",
     "submodules:update": "git submodule foreach git pull origin main",
     "test": "cd tests && npm t",

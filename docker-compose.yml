@@ -19,7 +19,7 @@ services:
       # jboss/keycloak realm import doesn't work at all
       - -Dkeycloak.migration.action=import -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=/tmp/realm.json -Dkeycloak.migration.strategy=OVERWRITE_EXISTING
     networks:
-      - grupo3
+      - constr-sw-2022-2
 
   keycloak-api:
     build: keycloak-api
@@ -32,7 +32,7 @@ services:
       - KEYCLOAK_RESOURCE=grupoX
       - KEYCLOAK_SECRET=TB5t48zpxSM1qqj7rR4G6WxucHmAjmWE
     networks:
-      - grupo3
+      - constr-sw-2022-2
 
   postgresql:
     container_name: postgresql
@@ -46,7 +46,7 @@ services:
     volumes:
       - postgresql-data:/var/lib/postgresql/data
     networks:
-      - grupo3
+      - constr-sw-2022-2
 
   reservations-api:
     build: reservations-api
@@ -60,11 +60,13 @@ services:
       - DB_PORT=5432
       - DB_USER=postgres
     networks:
-      - grupo3
+      - constr-sw-2022-2
 
 networks:
-  grupo3:
+  constr-sw-2022-2:
     external: true
 volumes:
   keycloak-data:
+    external: true
   postgresql-data:
+    external: true

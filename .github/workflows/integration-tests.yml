@@ -8,8 +8,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Create network
+      - name: Create docker networks
         run: npm run up:network
+      - name: Create docker volumes
+        run: npm run up:volumes
       - name: Up all
         run: npm run up
       - name: Install dependencies

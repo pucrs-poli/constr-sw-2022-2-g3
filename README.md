@@ -6,6 +6,11 @@ Requisitos:
 - Docker
 - Node 16+ (certifique-se que o npm está na versão 7 para cima)
 
+### Antes de subir a aplicação
+
+`npm run up:network` (cria a rede constr-sw-2022-2)
+`npm run up:volumes` (cria os volumes do postgresql e keycloak)
+
 ### Subir toda a aplicação
 
 Subir toda aplicação (keycloak, keycloak-api, reservations-api)
