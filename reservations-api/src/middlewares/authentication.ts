@@ -14,7 +14,7 @@ export async function expressAuthentication(
   scopes?: string[]
 ) {
   if (securityName === "api_key") {
-    const token = req.headers.authorization;
+    const token = req.headers.authorization?.split('Bearer ')?.pop();
     if (!token) throw new UnauthorizedError();
     const { status, data: userInfo } = await AuthService.getUserInfo(token);
     console.log(status, userInfo)

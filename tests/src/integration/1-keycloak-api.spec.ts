@@ -2,13 +2,13 @@ import chai, { expect } from 'chai';
 import { sleep } from '../utils/functions';
 
 describe('Keycloak api tests', () => {
-    let authorization: string;
+    let token: string;
     let testUserId: string;
 
     const extractTestUser = (fn: (success: boolean) => void) => {
         chai.request('http://localhost:3000')
         .get('/users')
-        .set('Authorization', authorization)
+        .set('Authorization', `Bearer ${token}`)
         .end((err, res) => {
             expect(res.status).to.be.eq(200);
             expect(res.body).to.be.an('array');
@@ -38,7 +38,7 @@ describe('Keycloak api tests', () => {
             try {
                 await sleep(1000);
                 expect(res.status).to.be.eq(200);
-                authorization = res.body.access_token;
+                token = res.body.access_token;
                 done();
             } catch (err) {
                 done(err);
@@ -57,7 +57,7 @@ describe('Keycloak api tests', () => {
                     groups: ['/coordenadores'],
                     enabled: true,
                 })
-                .set('Authorization', authorization)
+                .set('Authorization', `Bearer ${token}`)
                 .end((err, res) => {
                     expect(res.status).to.be.eq(201);
                     extractTestUser(success => {
@@ -80,7 +80,7 @@ describe('Keycloak api tests', () => {
         .send({
             password: 'pass',
         })
-        .set('Authorization', authorization)
+        .set('Authorization', `Bearer ${token}`)
         .end((err, res) => {
             expect(res.status).to.be.eq(200);
             done();

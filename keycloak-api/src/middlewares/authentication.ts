@@ -10,7 +10,7 @@ export async function expressAuthentication(
   scopes?: string[]
 ) {
   if (securityName === "api_key") {
-    const token = req.headers.authorization;
+    const token = req.headers.authorization?.split('Bearer ')?.pop();
     return { token };
   }
 }

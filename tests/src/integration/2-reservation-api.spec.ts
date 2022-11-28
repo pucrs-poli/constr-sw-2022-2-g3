@@ -4,7 +4,7 @@ import { devReset } from '../utils/dev-api-calls';
 
 describe('Reservations api tests', () => {
     let createdReservationId: string;
-    let authorization: string;
+    let token: string;
 
     before((done) => {
         devReset(done);
@@ -26,7 +26,7 @@ describe('Reservations api tests', () => {
         .end((err, res) => {
             expect(res.status).to.be.eq(200);
             expect(res.body.access_token).to.be.an('string');
-            authorization = res.body.access_token;
+            token = res.body.access_token;
             done();
         })
     });
@@ -34,7 +34,7 @@ describe('Reservations api tests', () => {
     it('Get all reservations', (done) => {
         chai.request('http://localhost:8083')
         .get('/reservations')
-        .set('Authorization', authorization)
+        .set('Authorization', `Bearer ${token}`)
         .end((err, res) => {
             expect(res.status).to.be.eq(200);
             expect(res.body).to.be.an('array');
@@ -59,7 +59,7 @@ describe('Reservations api tests', () => {
         };
         chai.request('http://localhost:8083')
         .post('/reservations')
-        .set('Authorization', authorization)
+        .set('Authorization', `Bearer ${token}`)
         .send(createReservation)
         .end((err, res) => {
             expect(res.status).to.be.eq(201);
@@ -84,7 +84,7 @@ describe('Reservations api tests', () => {
         };
         chai.request('http://localhost:8083')
         .post('/reservations')
-        .set('Authorization', authorization)
+        .set('Authorization', `Bearer ${token}`)
         .send(createReservation)
         .end((err, res) => {
             expect(res.status).to.be.eq(409);
@@ -95,7 +95,7 @@ describe('Reservations api tests', () => {
     it('Try to update reservation date to conflict with another', (done) => {
         chai.request('http://localhost:8083')
         .patch('/reservations')
-        .set('Authorization', authorization)
+        .set('Authorization', `Bearer ${token}`)
         .send({
             id: createdReservationId,
             resource_id: '00000000-0000-0000-0000-000000000001',
@@ -109,7 +109,7 @@ describe('Reservations api tests', () => {
     it('Update reservation', (done) => {
         chai.request('http://localhost:8083')
         .patch('/reservations')
-        .set('Authorization', authorization)
+        .set('Authorization', `Bearer ${token}`)
         .send({
             id: createdReservationId,
             resource_id: '00000000-0000-0000-0000-000000000003',
@@ -126,7 +126,7 @@ describe('Reservations api tests', () => {
     it('Get reservation by id', (done) => {
         chai.request('http://localhost:8083')
         .get(`/reservations/${createdReservationId}`)
-        .set('Authorization', authorization)
+        .set('Authorization', `Bearer ${token}`)
         .end((err, res) => {
             expect(res.status).to.be.eq(200);
 
@@ -143,7 +143,7 @@ describe('Reservations api tests', () => {
     it('Delete reservation by id', (done) => {
         chai.request('http://localhost:8083')
         .delete(`/reservations/${createdReservationId}`)
-        .set('Authorization', authorization)
+        .set('Authorization', `Bearer ${token}`)
         .end((err, res) => {
             expect(res.status).to.be.eq(204);
             done();

@@ -133,7 +133,7 @@ export class KeycloakClient {
                 url: `${url}/realms/${realm}/protocol/openid-connect/userinfo`,
                 method: 'POST',
                 headers: {
-                    Authorization: 'Bearer ' + token,
+                    Authorization: `Bearer ${token}`,
                 },
                 json: true,
             }, (_, response, body) => resolve({status: response?.statusCode || 500, data: body}));
@@ -148,7 +148,7 @@ export class KeycloakClient {
                 url: `${url}/admin/realms/${realm}/users`,
                 method: 'POST',
                 headers: {
-                    Authorization: 'Bearer ' + token,
+                    Authorization: `Bearer ${token}`,
                 },
                 body,
                 json: true,
@@ -164,7 +164,7 @@ export class KeycloakClient {
                 url: `${url}/admin/realms/${realm}/users`,
                 method: 'GET',
                 headers: {
-                    Authorization: 'Bearer ' + token,
+                    Authorization: `Bearer ${token}`,
                 },
                 json: true,
             }, (_, response, body) => resolve({status: response?.statusCode || 500, data: body}));
@@ -179,7 +179,7 @@ export class KeycloakClient {
                 url: `${url}/admin/realms/${realm}/users/${id}`,
                 method: 'GET',
                 headers: {
-                    Authorization: 'Bearer ' + token,
+                    Authorization: `Bearer ${token}`,
                 },
                 json: true,
             }, (_, response, body) => resolve({status: response?.statusCode || 500, data: body}));
@@ -194,7 +194,7 @@ export class KeycloakClient {
                 url: `${url}/admin/realms/${realm}/users/${id}`,
                 method: 'DELETE',
                 headers: {
-                    Authorization: 'Bearer ' + token,
+                    Authorization: `Bearer ${token}`,
                 },
                 json: true,
             }, (_, response, body) => resolve({status: response?.statusCode || 500, data: body}));
@@ -210,7 +210,7 @@ export class KeycloakClient {
                 url: `${url}/admin/realms/${realm}/users/${id}`,
                 method: 'PUT',
                 headers: {
-                    Authorization: 'Bearer ' + token,
+                    Authorization: `Bearer ${token}`,
                 },
                 body,
                 json: true,
@@ -231,7 +231,7 @@ export class KeycloakClient {
                 url: `${url}/admin/realms/${realm}/users/${id}/reset-password`,
                 method: 'PUT',
                 headers: {
-                    Authorization: 'Bearer ' + token,
+                    Authorization: `Bearer ${token}`,
                 },
                 body: a,
                 json: true,

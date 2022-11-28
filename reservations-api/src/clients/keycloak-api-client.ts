@@ -19,7 +19,7 @@ export class KeycloakApiClient {
                 url: `${url}/user-info`,
                 method: 'GET',
                 headers: {
-                    Authorization: token,
+                    Authorization: `Bearer ${token}`,
                 },
                 json: true,
             }, (_, response, body) => resolve({status: response?.statusCode || 500, data: body}));
